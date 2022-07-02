@@ -1,0 +1,7 @@
+{
+  "name": "SOU",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
