@@ -1,61 +1,68 @@
 import React, { useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonLabel, IonList, IonItemDivider, IonButton, IonAvatar, IonChip, IonIcon, IonRow, IonCol } from '@ionic/react';
+import { IonContent,IonPage, IonInput, IonItem, IonLabel,IonButton, IonAvatar,IonRow, IonCol, IonCard, IonCardContent, IonCardHeader} from '@ionic/react';
+import { RegisterUser } from '../../firebase/firebaseConfig';
 const Registro: React.FC = () => {
-  const [text, setText] = useState<string>();
-  const [number, setNumber] = useState<number>();
+  const [Email,setEmail] = useState('')
+  
+  const [ContrasenaR,setContrasenaR] = useState('')
+  const [ReContrasenaR,setReContrasenaR] = useState('')
+  async function Register(){
+    const res = await RegisterUser(Email,ContrasenaR)
+    console.log(res)
+    if(!res){
+      console.log("No")
+    }else{
+      console.log("Si")
+    }
+  }
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Registro</IonTitle>
-        </IonToolbar>
-      </IonHeader>
       <IonContent>
+      <IonCard>
+          <IonCardHeader>
+          <IonAvatar class="align-text-center">
+          <img src="assets/icon/reg.png" ></img>
+          </IonAvatar>
+          </IonCardHeader>
+
+          <IonCardContent>
+          
         <IonRow>
           <IonCol>
             <IonItem>
-              <IonLabel position="floating">Nombres</IonLabel>
-              <IonInput type="text"></IonInput>
+              <IonLabel color={'medium'} position="floating">Email</IonLabel>
+              <IonInput onIonChange={(e: any) =>setEmail(e.target.value)} type="email"></IonInput>
             </IonItem>
           </IonCol>
         </IonRow>
         <IonRow>
           <IonCol>
             <IonItem>
-              <IonLabel position="floating">Apellidos</IonLabel>
-              <IonInput type="text"></IonInput>
+              <IonLabel color={'medium'}  position="floating">Contraseña</IonLabel>
+              <IonInput onIonChange={(e: any) =>setContrasenaR(e.target.value)} type="password"></IonInput>
             </IonItem>
           </IonCol>
         </IonRow>
         <IonRow>
           <IonCol>
             <IonItem>
-              <IonLabel position="floating">Email</IonLabel>
-              <IonInput type="email"></IonInput>
-            </IonItem>
-          </IonCol>
-        </IonRow>
-        <IonRow>
-          <IonCol>
-            <IonItem>
-              <IonLabel position="floating">Contraseña</IonLabel>
-              <IonInput type="password"></IonInput>
-            </IonItem>
-          </IonCol>
-        </IonRow>
-        <IonRow>
-          <IonCol>
-            <IonItem>
-              <IonLabel position="floating">Confirmar contraseña</IonLabel>
-              <IonInput type="password"></IonInput>
+              <IonLabel color={'medium'}  position="floating">Confirmar contraseña</IonLabel>
+              <IonInput onIonChange={(e: any) =>setReContrasenaR(e.target.value)} type="password"></IonInput>
             </IonItem>
           </IonCol>
         </IonRow>
         <IonRow>
           <IonCol className="ion-text-center ion-margin-top">
-            <IonButton expand="block" fill="outline">Registrar</IonButton>
+            <IonButton expand="block" onClick={Register} fill="outline">Registrar</IonButton>
           </IonCol>
         </IonRow>
+        <IonRow>
+          <IonCol className="ion-text-center ion-margin-top">
+            <IonButton expand="block" routerLink='/Inicio-sesión' fill="outline">Regresar</IonButton>
+          </IonCol>
+        </IonRow>
+          </IonCardContent>
+      </IonCard>
       </IonContent>
     </IonPage>
     );

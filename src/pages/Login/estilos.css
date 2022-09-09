@@ -1,0 +1,66 @@
+ion-grid ion-item ion-input{
+    color: #d312f556;
+}
+ion-grid ion-item {
+    border-radius: 10px;
+}
+ion-grid ion-label{
+    color: #d312f556;
+    border-radius: 10px;
+}
+ion-item ion-imput{
+    background-color: rgba(83, 148, 178, 0.195);
+}
+ion-card{
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(83, 148, 178, 0.195);
+}
+ion-row{
+    vertical-align: middle;
+}
+#gh{
+    text-align: center;
+}
+ion-content{
+    background-color: rgba(83, 148, 178, 0.195);
+}
+ion-button{
+    color: #412e44eb;
+    border-radius: 40px;
+    background-color: rgba(29, 146, 192, 0.157);
+}
+ion-label.hg{
+    color: #d312f556;
+}
+ion-col{
+    margin: 0 auto;
+}
+ion-list ion-list-header ion-item ion-avatar{
+    height: 30px;
+    width: 30px;
+}
+.fg{
+    height: 50px;
+    width: 50px;
+}
+ion-card ion-avatar{
+    height: 125px;
+    width: 125px;
+    margin: 0 auto;
+}
+ion-header ion-toolbar{
+    color: #d312f556;
+}
+ion-header{
+    background-color: rgba(25, 226, 226, 0.147);
+}
+ion-item{
+   border-radius: 10px;
+}
+ion-cart-title{
+    margin: 0 auto;
+}
+ion-modal{
+    background-color: rgba(25, 226, 226, 0.147); 
+}

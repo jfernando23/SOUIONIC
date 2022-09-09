@@ -1,35 +1,55 @@
-import { IonButton, IonCol, IonContent, IonDatetime, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonRow, IonSegment, IonSegmentButton, IonTitle, IonToolbar } from '@ionic/react';
+import { useIonToast, IonButton, IonCol, IonContent,IonGrid, IonInput, IonItem, IonLabel, IonPage, IonRow, IonCard, IonCardContent, IonAvatar } from '@ionic/react';
+import { useState } from 'react';
+import { LoginUser } from '../../firebase/firebaseConfig';
+import { Exiteusu } from '../../firebase/firebaseConfig';
+import { useHistory } from 'react-router-dom';
+import './estilos.css';
 
 const Login: React.FC = () => {
+  //watchUserChanges();
+  const [Usuario,setUsuario] = useState('')
+  const [Contrasena,setContrasena] = useState('')
+  const [present, dismiss] = useIonToast()
+  let history = useHistory();
+ 
+  async function login(){
+    const stateObj = { foo: 'bar' };
+    const  res = await LoginUser(Usuario,Contrasena)
+    if (!res) {
+      console.log("no")
+      //toast("No ingreso") 
+      present('Credenciales incorrectas',300)
+    }else{
+      const  credenciales = await Exiteusu();
+      if(credenciales === null){
+        present('Credenciales incorrectas',300)
+      }else{
+        history.push("/Cuetionario-Diagnóstico")
+      }
+      //console.log(res.user.uid);
+      //history.push("/Cuetionario-Diagnóstico")
+      //console.log("si");
+      //toast("Si ingreso")
+    }
+  }
   return (
+    
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>SOU</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonGrid>
-            <IonRow>
-                <IonCol className="ion-text-center">
-                    <IonSegment>
-                        <IonSegmentButton value="work">
-                          <IonLabel>Work</IonLabel>
-                        </IonSegmentButton>
-                        <IonSegmentButton value="rest">
-                          <IonLabel>Rest</IonLabel>
-                        </IonSegmentButton>
-                        <IonSegmentButton value="hobby">
-                          <IonLabel>Hobby</IonLabel>
-                        </IonSegmentButton>
-                    </IonSegment>
-                </IonCol>
-            </IonRow>
-            <IonRow>
+      <IonContent >
+      <IonCard>
+        <br />
+        <br />
+        <IonAvatar class="align-text-center">
+        <img src="assets/icon/sou3.png" ></img>
+        </IonAvatar>
+        <br />
+        <br />
+          <IonCardContent>
+          <IonRow>
                 <IonCol>
                     <IonItem>
-                        <IonLabel position="floating">Email</IonLabel>
-                        <IonInput type="text"></IonInput>
+                        <IonLabel color={'medium'} class='hg' position="floating">Email</IonLabel>
+                        <IonInput onIonChange={(e: any) =>setUsuario(e.target.value)} type="text"></IonInput>
                     </IonItem>
                 </IonCol>
             </IonRow>
@@ -37,30 +57,24 @@ const Login: React.FC = () => {
             <IonRow>
                 <IonCol>
                     <IonItem>
-                        <IonLabel position="floating">Contraseña</IonLabel>
-                        <IonInput type="text"></IonInput>
+                        <IonLabel color={'medium'} position="floating">Contraseña</IonLabel>
+                        <IonInput color={'primary'} onIonChange={(e: any) =>setContrasena(e.target.value)} type="password"></IonInput>
                     </IonItem>
                 </IonCol>
             </IonRow>
   
             <IonRow>
               <IonCol className="ion-text-center ion-margin-top">
-                    <IonButton expand="block" fill="outline">INICIAR SESIÓN</IonButton>
+                    <IonButton expand="block" onClick={login}  fill="outline">INICIAR SESIÓN</IonButton>
               </IonCol>
             </IonRow>
-
             <IonRow>
               <IonCol className="ion-text-center ion-margin-top">
-                    <IonButton expand="block" fill="outline">REGISTRARSE</IonButton>
+                    <IonButton id='hg' routerLink='/Registro' expand="block" fill="outline">REGISTRARSE</IonButton>
               </IonCol>
             </IonRow>
-
-        </IonGrid>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+          </IonCardContent>
+        </IonCard>
       </IonContent>
     </IonPage>
   );
